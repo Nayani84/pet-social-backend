@@ -1,0 +1,72 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/petUpdate.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [ ],
+    "properties": {
+        "name": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 100,
+            "title": "The name Schema",
+            "examples": [
+                "testpet"
+            ]
+        },
+        "type": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 20,
+            "title": "The type Schema",
+            "examples": [
+                "dog"
+            ]
+        },
+        "breed": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 50,
+            "title": "The breed Schema",
+            "examples": [
+                "testbreed"
+            ]
+        },
+        "age": {
+            "type": "integer",
+            "default": 0,
+            "title": "The age Schema",
+            "examples": [
+                2
+            ]
+        },
+        "bio": {
+            "type": "string",
+            "default": "",
+            "title": "The bio Schema",
+            "examples": [
+                "testbio"
+            ]
+        },
+        "photo_url": {
+            "type": "string",
+            "default": "",
+            "title": "The photo_url Schema",
+            "examples": [
+                "testurl"
+            ]
+        }
+    },
+    "examples": [{
+        "name": "testpet",
+        "type": "dog",
+        "breed": "testbreed",
+        "age": 2,
+        "bio": "testbio",
+        "photo_url": "testurl"
+    }]
+}

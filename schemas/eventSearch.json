@@ -1,0 +1,55 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/eventSearch.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [],
+    "properties": {
+        "title": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 100,
+            "title": "The title Schema",
+            "examples": [
+                "testtitle"
+            ]
+        },
+        "startDate": {
+            "type": "string",
+            "default": "",
+            "format": "date",
+            "title": "The startDate Schema",
+            "examples": [
+                "2025-02-02T00:00:00Z"
+            ]
+        },
+        "endDate": {
+            "type": "string",
+            "default": "",
+            "format": "date",
+            "title": "The endDate Schema",
+            "examples": [
+                "2025-05-05T00:00:00Z"
+            ]
+        },
+        "createdBy": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 1,
+            "title": "The createdBy Schema",
+            "examples": [
+                5
+            ]
+        }
+    },
+    "examples": [
+        {
+            "title": "testtitle",
+            "startDate": "2025-02-02T00:00:00Z",
+            "endDate": "2025-05-05T00:00:00Z",
+            "createdBy": 5
+        }
+    ]
+}

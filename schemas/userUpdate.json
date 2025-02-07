@@ -1,0 +1,53 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/userUpdate.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [],
+    "properties": {
+        "name": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 50,
+            "title": "The name Schema",
+            "examples": [
+                "testname"
+            ]
+        },
+        "email": {
+            "type": "string",
+            "default": "",
+            "title": "The email Schema",
+            "format": "email",
+            "examples": [
+                "test@gmail.com"
+            ]
+        },
+        "password": {
+            "type": "string",
+            "default": "",
+            "minLength": 6,
+            "maxLength": 100,
+            "title": "The password Schema",
+            "examples": [
+                "testPassword"
+            ]
+        },
+        "profile_pic": {
+            "type": "string",
+            "default": "",
+            "title": "The profile_pic Schema",
+            "examples": [
+                "testpic"
+            ]
+        }
+    },
+    "examples": [{
+        "name": "testname",
+        "email": "test@gmail.com",
+        "password": "testPassword",
+        "profile_pic": "testpic"
+    }]
+}

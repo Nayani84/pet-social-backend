@@ -1,0 +1,77 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/eventUpdate.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [],
+    "properties": {
+        "title": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 100,
+            "title": "The title Schema",
+            "examples": [
+                "testtitle"
+            ]
+        },
+        "description": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 1000,
+            "title": "The description Schema",
+            "examples": [
+                "testdescription"
+            ]
+        },
+        "location": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 255,
+            "title": "The location Schema",
+            "examples": [
+                "testlocation"
+            ]
+        },
+        "date": {
+            "type": "string",
+            "default": "",
+            "format": "date-",
+            "title": "The date Schema",
+            "examples": [
+                "2025-03-03"
+            ]
+        },
+        "startTime": {
+            "type": "string",
+            "default": "",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "The startTime Schema",
+            "examples": [
+"07:32"
+]
+        },
+        "endTime": {
+            "type": "string",
+            "default": "",
+            "pattern": "^([01][0-9]|2[0-3]):[0-5][0-9]$",
+            "title": "The endTime Schema",
+            "examples": [
+                "04:00"
+            ]
+        }
+    },
+    "examples": [
+        {
+            "title": "testtitle",
+            "description": "testdescription",
+            "location": "testlocation",
+            "date": "2025-03-03",
+            "startTime": "10:00",
+            "endTime": "13:00"
+        }
+    ]
+}

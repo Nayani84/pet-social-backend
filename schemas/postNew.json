@@ -1,0 +1,47 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/postNew.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [
+        "content",
+        "ownerId"
+    ],
+    "properties": {
+        "content": {
+            "type": "string",
+            "default": "my new pet!",
+            "minLength": 1,
+            "maxLength": 1000,
+            "title": "The content Schema",
+            "examples": [
+                "testcontent"
+            ]
+        },
+        "imageUrl": {
+            "type": "string",
+            "default": "",
+            "title": "The imageUrl Schema",
+            "examples": [
+                "testimg"
+            ]
+        },
+        "ownerId": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 1,
+            "title": "The ownerId Schema",
+            "examples": [
+                5
+            ]
+        }
+    },
+    "examples": [
+        {
+            "content": "testcontent",
+            "imageUrl": "testimg",
+            "ownerId": 5
+        }
+    ]
+}

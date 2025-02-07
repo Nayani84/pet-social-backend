@@ -1,0 +1,76 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/example.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [],
+    "properties": {
+        "ownerId": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 1,
+            "title": "The ownerId Schema",
+            "examples": [
+                5
+            ]
+        },
+       "content": {
+            "type": "string",
+            "default": "my new pet!",
+            "minLength": 0,
+            "maxLength": 1000,
+            "title": "The content Schema",
+            "examples": [
+                "testcontent"
+            ]
+        },
+        "startDate": {
+            "type": "string",
+            "default": "",
+            "format": "date",
+            "title": "The startDate Schema",
+            "examples": [
+                "2024-02-02"
+            ]
+        },
+        "endDate": {
+            "type": "string",
+            "default": "",
+            "format": "date",
+            "title": "The endDate Schema",
+            "examples": [
+                "2024-03-03"
+            ]
+        },
+        "limit": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "title": "The limit Schema",
+            "examples": [
+                10
+            ]
+        },
+        "offset": {
+            "type": "integer",
+            "default": 0,
+            "minimum": 0,
+            "title": "The offset Schema",
+            "examples": [
+                0
+            ]
+        }
+    },
+    "additionalProperties": false,
+    "examples": [
+        {
+            "ownerId": 5,
+            "content": "testcontent",
+            "startDate": "2024-02-02",
+            "endDate": "2024-03-03",
+            "limit": 10,
+            "offset": 0
+        }
+    ]
+}

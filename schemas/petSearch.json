@@ -1,0 +1,45 @@
+{
+    "$schema": "http://json-schema.org/draft-07/schema#",
+    "$id": "http://example.com/petSearch.json",
+    "type": "object",
+    "default": {},
+    "title": "Root Schema",
+    "required": [ ],
+    "properties": {
+        "name": {
+            "type": "object",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 100,
+            "title": "The name Schema",
+            "examples": [
+                "testpet"
+            ]
+        },
+        "type": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 20,
+            "title": "The type Schema",
+            "examples": [
+                "dog"
+            ]
+        },
+        "breed": {
+            "type": "string",
+            "default": "",
+            "minLength": 1,
+            "maxLength": 50,
+            "title": "The breed Schema",
+            "examples": [
+                "testbreed"
+            ]
+        }
+    },
+    "examples": [{
+        "name": "{}",
+        "type": "dog",
+        "breed": "testbreed"
+    }]
+}
