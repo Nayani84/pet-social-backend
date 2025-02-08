@@ -25,7 +25,7 @@ const app = express();
 app.use(express.static('public'));
 
 app.use(cors({
-  origin: '*', // Allows all domains
+  origin: 'https://pet-social-frontend.onrender.com', // Allows all domains
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));

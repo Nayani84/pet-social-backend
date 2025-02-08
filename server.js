@@ -8,5 +8,5 @@ const { PORT } = require('./config');
 socketConfig.init(server);  // Initialize socket.io with the server
 
 server.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
