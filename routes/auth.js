@@ -130,7 +130,7 @@ router.get('/google/callback', async (req, res) => {
         console.log('Event created: %s', event.data.htmlLink);
         // Redirect back to frontend event page
         const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
-        res.redirect(`${frontendUrl}/events/${gcalEvent.id}`);
+        res.redirect(`${frontendUrl}/events/${gcalEvent.id}`);         
       });
     }
 
