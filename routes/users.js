@@ -71,6 +71,7 @@ router.get("/", ensureAdmin, async function (req, res, next) {
 router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const user = await User.get(req.params.username);
+
     // Ensure the profile picture URL is updated
     user.profilePic = buildImageUrl(user.profilePic);
 
@@ -91,6 +92,12 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
 router.get("/:username/posts", ensureCorrectUserOrAdmin, async function (req, res, next) {
   try {
     const posts = await User.getPostsByUser(req.params.username);
+
+    // Update image URLs for each pet
+    posts.forEach(post => {
+      post.imageUrl = buildImageUrl(post.imageUrl);
+    });
+
     return res.json({ posts });
   } catch (err) {
     return next(err);
@@ -120,6 +127,12 @@ router.get("/:username/pets", ensureCorrectUserOrAdmin, async function (req, res
     );
 
     const pets = await User.getPetsByUser(req.params.username, cleanedFilters);
+
+    // Update image URLs for each pet
+    pets.forEach(pet => {
+      pet.photoUrl = buildImageUrl(pet.photoUrl);
+    });
+
     return res.json({ pets });
   } catch (err) {
     return next(err);
