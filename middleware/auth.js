@@ -56,8 +56,6 @@ function authenticateJWT(req, res, next) {
 
 function ensureLoggedIn(req, res, next) {
   try {
-    // console.log("res.locals.user in ensureLoggedIn:", res.locals.user);
-    // if (!res.locals.user || !res.locals.user.id) throw new UnauthorizedError();
     if (!res.locals.user) throw new UnauthorizedError("User must be logged in");
     return next();
   } catch (err) {
@@ -92,11 +90,9 @@ function ensureAdmin(req, res, next) {
 async function ensureCorrectUserOrAdmin(req, res, next) {
   try {
     const user = res.locals.user;
-    // console.log("*****************localuser", user);
     if (!user) throw new UnauthorizedError("No authentication provided.");
 
     const { username, id } = req.params;
-    // console.log("Checking user access for params:", { username, id });
 
     if (username) {
       // Check for user routes

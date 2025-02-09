@@ -128,7 +128,7 @@ router.get('/google/callback', async (req, res) => {
           return res.status(500).send(err);
         }
         console.log('Event created: %s', event.data.htmlLink);
-        // Redirect back to frontend event page
+        // Redirect back to frontend home page
         const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
         res.redirect(`${frontendUrl}`);         
       });
