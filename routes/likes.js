@@ -139,7 +139,7 @@ router.get("/count/:postId", ensureLoggedIn, async (req, res, next) => {
 
     //   const likesCount = parseInt(result.rows[0].likesCount, 10);
     const likesCount = await Like.getLikesCount(postId);
-    await db.query("DELETE FROM likes WHERE post_id = $1", [postId]);
+    // await db.query("DELETE FROM likes WHERE post_id = $1", [postId]);
 
     return res.json({ likesCount });
   } catch (err) {
