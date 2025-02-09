@@ -3,6 +3,7 @@
 const db = require("../db");
 const { NotFoundError } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
+const { buildImageUrl } = require("../helpers/imageUtils");
 
 
 /** Related functions for posts. */
@@ -142,6 +143,9 @@ class Post {
         const post = postRes.rows[0];
 
         if (!post) throw new NotFoundError(`No post found with id: ${id}`);
+
+        // Update the image URL
+        post.imageUrl = buildImageUrl(post.imageUrl);
 
         return post;
     }

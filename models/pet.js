@@ -4,6 +4,7 @@ const { serializeUser } = require("passport");
 const db = require("../db");
 const { BadRequestError, NotFoundError } = require("../expressError");
 const { sqlForPartialUpdate } = require("../helpers/sql");
+const { buildImageUrl } = require("../helpers/imageUtils");
 
 /** Related functions for pets. */
 
@@ -18,7 +19,7 @@ class Pet {
        * */
 
     static async create({ name, type, breed, age, bio, photoUrl, ownerId }) {
-        
+
         const duplicateCheck = await db.query(
             `SELECT id
            FROM pets
@@ -137,6 +138,9 @@ class Pet {
         const pet = petRes.rows[0];
 
         if (!pet) throw new NotFoundError(`No pet found with id: ${id}`);
+
+        // Update the photo URL 
+        pet.photoUrl = buildImageUrl(pet.photoUrl);
 
         return pet;
     }

@@ -3,6 +3,7 @@
 const db = require("../db");
 const bcrypt = require("bcrypt");
 const { sqlForPartialUpdate } = require("../helpers/sql");
+const { buildImageUrl } = require("../helpers/imageUtils");
 const {
     NotFoundError,
     BadRequestError,
@@ -64,7 +65,7 @@ class User {
             `SELECT username
              FROM users
              WHERE username = $1`,
-             [username],
+            [username],
         );
 
         if (duplicateCheck.rows[0]) {
@@ -145,15 +146,18 @@ class User {
 
         if (!user) throw new NotFoundError(`No user: ${username}`);
 
+        // Update the profile picture URL
+        user.profilePic = buildImageUrl(user.profilePic);
+
         // Fetch the user's posts
         const userPostsRes = await db.query(
             `SELECT id,
-                                                content,
-                                                image_url AS "imageUrl",
-                                                created_at AS "createdAt"
-                                        FROM posts
-                                        WHERE owner_id = (SELECT id FROM users WHERE username = $1)
-                                        ORDER BY created_at`,
+                    content,
+                    image_url AS "imageUrl",
+                    created_at AS "createdAt"
+            FROM posts
+            WHERE owner_id = (SELECT id FROM users WHERE username = $1)
+            ORDER BY created_at`,
             [username]
         )
 

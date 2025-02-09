@@ -5,8 +5,10 @@ const socketConfig = require('./socket');
 const server = http.createServer(app);
 const { PORT } = require('./config');
 
-socketConfig.init(server);  // Initialize socket.io with the server
+// Initialize Socket.IO
+socketConfig.init(server);
 
+// Start the server
 server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });

@@ -4,7 +4,7 @@ CREATE TABLE users (
     name TEXT NOT NULL,
     email VARCHAR(100) NOT NULL UNIQUE CHECK (position('@' IN email) > 1),
     password VARCHAR(100) NOT NULL,
-    profile_pic TEXT DEFAULT 'http://localhost:3001/images/user.png',
+    profile_pic TEXT DEFAULT '/images/user.png',
     is_admin BOOLEAN NOT NULL DEFAULT FALSE
 );  
 
@@ -15,7 +15,7 @@ CREATE TABLE pets (
     breed VARCHAR(50),
     age INT CHECK (age >= 0),
     bio TEXT,
-    photo_url TEXT DEFAULT 'http://localhost:3001/images/pets.jpg',
+    photo_url TEXT DEFAULT '/images/pets.jpg',
     owner_id INT NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );
 

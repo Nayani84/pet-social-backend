@@ -4,6 +4,7 @@
 
 const jsonschema = require("jsonschema");
 const express = require("express");
+const { buildImageUrl } = require("../helpers/imageUtils");
 const { BadRequestError } = require("../expressError");
 const { ensureLoggedIn, ensureAdmin, ensureCorrectUserOrAdminPost, authenticateJWT } = require("../middleware/auth");
 const Post = require("../models/post");
@@ -63,8 +64,8 @@ router.get("/", async function (req, res, next) {
             content: content || undefined,
             startDate: startDate || undefined,
             endDate: endDate || undefined,
-            limit: limit ? parseInt(limit, 10) : 10, 
-            offset: offset ? parseInt(offset, 10) : 0 
+            limit: limit ? parseInt(limit, 10) : 10,
+            offset: offset ? parseInt(offset, 10) : 0
         };
 
         if (filters.ownerId && isNaN(filters.ownerId)) {
@@ -88,6 +89,12 @@ router.get("/", async function (req, res, next) {
         }
 
         const posts = await Post.findAll(filters);
+
+        // Update image URLs for each pet
+        posts.forEach(post => {
+            post.imageUrl = buildImageUrl(post.imageUrl);
+        });
+
         return res.json({ posts });
     } catch (err) {
         return next(err);

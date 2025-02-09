@@ -25,7 +25,7 @@ const app = express();
 app.use(express.static('public'));
 
 app.use(cors({
-  origin: 'https://pet-social-frontend.onrender.com', // Allows all domains
+  origin: process.env.FRONTEND_URL || 'https://pet-social-frontend.onrender.com',
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
   credentials: true
 }));
@@ -35,6 +35,10 @@ app.use(cors({
 //   methods: ['GET', 'POST', 'PUT', 'DELETE'],
 //   credentials: true
 // }));
+
+// Serve static files
+app.use(express.static('public'));
+
 // Security middleware
 app.use(helmet()); // Sets various HTTP headers for security
 

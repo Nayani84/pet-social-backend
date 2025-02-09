@@ -5,6 +5,7 @@
 const jsonschema = require("jsonschema");
 const express = require("express");
 const { BadRequestError } = require("../expressError");
+const { buildImageUrl } = require("../helpers/imageUtils");
 const { ensureLoggedIn, ensureAdmin, ensureCorrectUserOrAdminPet } = require("../middleware/auth");
 const Pet = require("../models/pet");
 const petNewSchema = require("../schemas/petNew.json");
@@ -60,6 +61,12 @@ router.get("/", async function (req, res, next) {
       throw new BadRequestError(errs);
     }
     const pets = await Pet.findAll({ type, breed, name });
+
+    // Update image URLs for each pet
+    pets.forEach(pet => {
+      pet.photoUrl = buildImageUrl(pet.photoUrl);
+    });
+
     return res.json({ pets });
   } catch (err) {
     return next(err);

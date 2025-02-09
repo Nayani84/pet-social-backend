@@ -128,10 +128,11 @@ router.get('/google/callback', async (req, res) => {
           return res.status(500).send(err);
         }
         console.log('Event created: %s', event.data.htmlLink);
-        res.redirect(`http://localhost:3000/events/${gcalEvent.id}`);
+        // Redirect back to frontend event page
+        const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
+        res.redirect(`${frontendUrl}/events/${gcalEvent.id}`);
       });
     }
-
 
   } catch (error) {
     console.error("Error during token exchange", error);
