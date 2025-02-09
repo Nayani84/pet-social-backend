@@ -72,8 +72,8 @@ router.get("/:username", ensureCorrectUserOrAdmin, async function (req, res, nex
   try {
     const user = await User.get(req.params.username);
 
-    // Ensure the profile picture URL is updated
-    user.profilePic = buildImageUrl(user.profilePic);
+    // // Ensure the profile picture URL is updated
+    // user.profilePic = buildImageUrl(user.profilePic);
 
     return res.json({ user });
   } catch (err) {
