@@ -1,12 +1,13 @@
 "use strict";
 
 /** Express app for pet-social. */
-const session = require('express-session');
 const express = require("express");
+const session = require('express-session');
 const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const path = require("path");
 
 const { NotFoundError } = require("./expressError");
 const { authenticateJWT } = require("./middleware/auth");
@@ -51,6 +52,7 @@ const limiter = rateLimit({
   max: 500, // limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.'
 });
+
 app.use(limiter);
 app.use(authenticateJWT);
 
@@ -75,6 +77,17 @@ app.use("/posts", postsRoutes);
 app.use("/likes", likesRoutes);
 app.use("/comments", commentsRoutes);
 app.use("/notifications", notificationsRoutes);
+
+// Static file handling for React build directory
+if (process.env.NODE_ENV === "production") {
+  // Serve static files from the React build directory
+  app.use(express.static(path.join(__dirname, "build")));
+
+  // Fallback route to serve React's index.html for all unrecognized paths
+  app.get("*", (req, res) => {
+    res.sendFile(path.join(__dirname, "build", "index.html"));
+  });
+}
 
 /** Handle 404 errors -- this matches everything */
 app.use(function (req, res, next) {
