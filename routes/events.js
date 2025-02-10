@@ -82,7 +82,6 @@ router.get("/", async function (req, res, next) {
             throw new BadRequestError(errs);
         }
 
-        console.log("backendOption", option);
         const events = await Event.findAll({ createdBy, title, startDate, endDate, latitude, longitude, option });
         return res.json({ events });
     } catch (err) {

@@ -54,7 +54,6 @@ router.post("/register", async function (req, res, next) {
     const validator = jsonschema.validate(req.body, userRegisterSchema);
     if (!validator.valid) {
       const customErrors = validator.errors.map(err => {
-        console.log("error ", err);
         if (err.property.includes('email')) {
           return "Please enter a valid email address.";
         }
@@ -82,7 +81,6 @@ router.post("/register", async function (req, res, next) {
 
 router.get('/login', (req, res) => {
   const eventId = req.query.eveid;
-  console.log("event id = ", eventId);
   req.session.googleEventId = eventId;
   const url = getAuthUrl();
   res.redirect(url);
@@ -92,11 +90,9 @@ router.get('/login', (req, res) => {
 /** GET /auth/google/callback */
 
 router.get('/google/callback', async (req, res) => {
-  console.log("****Google callback URL hit***", req.query);
   const { code } = req.query;
   try {
     const { tokens } = await oauth2Client.getToken(code);
-    console.log("Tokens received from Google:", tokens);
 
     if (!tokens.access_token) {
       throw new Error("No access token received from Google.");
@@ -106,14 +102,10 @@ router.get('/google/callback', async (req, res) => {
 
     // Save tokens in a secure place (e.g., session, database)
     req.session.tokens = tokens;
-    console.log("Tokens saved in session:", req.session.tokens);
-
-    console.log("google event id :", req.session.googleEventId);
 
     const gcalEvent = await Event.get(req.session.googleEventId);
 
     if (gcalEvent) {
-      console.log(gcalEvent);
       const eStartDt = new Date(gcalEvent.date + " " + gcalEvent.startTime);
       const eEndDt = new Date(gcalEvent.date + " " + gcalEvent.endTime);
       const calendar = google.calendar({ version: 'v3', auth: oauth2Client });
@@ -136,10 +128,8 @@ router.get('/google/callback', async (req, res) => {
         resource: event,
       }, (err, event) => {
         if (err) {
-          console.log(`Error contacting the Calendar service: ${err}`);
           return res.status(500).send(err);
         }
-        console.log('Event created: %s', event.data.htmlLink);
         // Redirect back to frontend home page
         const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3000';
         res.redirect(`${frontendUrl}`);         

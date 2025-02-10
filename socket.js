@@ -15,17 +15,14 @@ module.exports = {
 
             // Handle connection events
             io.on("connection", (socket) => {
-                console.log("A user connected:", socket.id);
 
                 // Event to join a notification room
                 socket.on("join", (userId) => {
-                    console.log(`User ${userId} joined notifications room`);
                     socket.join(`notifications_${userId}`);
                 });
 
                 // Disconnect event
                 socket.on("disconnect", () => {
-                    console.log("A user disconnected:", socket.id);
                 });
             });
         }

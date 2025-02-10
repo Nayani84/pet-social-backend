@@ -25,7 +25,6 @@ const router = new express.Router();
 
 router.post("/", ensureCorrectUserOrAdminPet, async function (req, res, next) {
   try {
-    // console.log("Request Body:", req.body); // Debugging
     const validator = jsonschema.validate(req.body, petNewSchema);
     if (!validator.valid) {
       const errs = validator.errors.map(e => e.stack);

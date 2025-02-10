@@ -2,7 +2,6 @@ const moment = require("moment");
 
 /** Convert 12-hour format (hh:mm A) to 24-hour format (HH:mm:ss) */
 function convertTo24HourFormat(time) {
-    // console.log(time);
     return moment(time, ["hh:mm A"]).format("HH:mm:ss");
 }
 
