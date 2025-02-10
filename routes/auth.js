@@ -53,14 +53,26 @@ router.post("/register", async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, userRegisterSchema);
     if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
-      throw new BadRequestError(errs);
+      const customErrors = validator.errors.map(err => {
+        console.log("error ", err);
+        if (err.property.includes('email')) {
+          return "Please enter a valid email address.";
+        }
+        if (err.property.includes('password')) {
+          return "Password must be at least 6 characters long.";
+        }
+        return "Invalid input.";
+      });
+      throw new BadRequestError(customErrors);
     }
 
     const newUser = await User.register({ ...req.body, isAdmin: false });
     const token = createToken(newUser);
     return res.status(201).json({ token });
   } catch (err) {
+    if (err.message.includes("users_email_key")) {
+      err.message = "this email address is alreay taken, Please enter a different one.";
+    }
     return next(err);
   }
 });
