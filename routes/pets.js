@@ -27,7 +27,12 @@ router.post("/", ensureCorrectUserOrAdminPet, async function (req, res, next) {
   try {
     const validator = jsonschema.validate(req.body, petNewSchema);
     if (!validator.valid) {
-      const errs = validator.errors.map(e => e.stack);
+      const errs = validator.errors.map(err => {
+        if (err.property.includes('breed')) {
+          return "The breed field cannot be empty. Please enter a valid breed.";
+        }
+        return "Invalid input.";
+      });
       throw new BadRequestError(errs);
     }
 
